@@ -149,7 +149,7 @@ function HomePage() {
               </p>
               <p className="text-lg text-gray-300">
                 Our all-day Coffee Bar ensures you can enjoy premium drinks, freshly baked pastries, and delicious desserts from morning until night.
-                And our unique principle of farm to table ensures fresh, high-quality ingredients in every dish.
+                Our organic farming practices and unique  principle of  farm to table ensures fresh, high-quality ingredients in every dish.
               </p>
         
             </div>
