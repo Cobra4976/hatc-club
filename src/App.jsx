@@ -37,6 +37,7 @@ function HomePage() {
   return (
     <div className="min-h-screen bg-black">
       {/* Navigation */}
+      {/* Navigation */}
       <nav className="fixed top-0 w-full bg-black shadow-lg z-50 border-b border-yellow-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -45,21 +46,13 @@ function HomePage() {
             </div>
             
             {/* Desktop Menu */}
-            <Link to="/" className="text-gray-300 hover:text-yellow-500 transition">Home</Link>
-            <Link to="/menu" className="text-gray-300 hover:text-yellow-500 transition">Menu</Link>
-            <Link to="/gallery" className="text-gray-300 hover:text-yellow-500 transition">Gallery</Link>
-            <Link to="/contact" className="text-gray-300 hover:text-yellow-500 transition">Contact</Link>
-            <Link to="/reservation" className="text-gray-300 hover:text-yellow-500 transition">Reserve</Link>
-
-
-            {/* <div className="hidden md:flex space-x-8">
-              <button onClick={() => scrollToSection('home')} className="text-gray-300 hover:text-yellow-500 transition">Home</button>
-              <button onClick={() => scrollToSection('about')} className="text-gray-300 hover:text-yellow-500 transition">About</button>
-              <button onClick={() => scrollToSection('offerings')} className="text-gray-300 hover:text-yellow-500 transition">What We Offer</button>
-              <button onClick={() => scrollToSection('location')} className="text-gray-300 hover:text-yellow-500 transition">Location</button>
-              
-            
-            </div> */}
+            <div className="hidden md:flex space-x-8">
+              <Link to="/" className="text-gray-300 hover:text-yellow-500 transition">Home</Link>
+              <Link to="/menu" className="text-gray-300 hover:text-yellow-500 transition">Menu</Link>
+              <Link to="/gallery" className="text-gray-300 hover:text-yellow-500 transition">Gallery</Link>
+              <Link to="/contact" className="text-gray-300 hover:text-yellow-500 transition">Contact</Link>
+              <Link to="/reservation" className="text-gray-300 hover:text-yellow-500 transition">Reserve</Link>
+            </div>
 
             {/* Mobile Menu Button */}
             <button 
@@ -75,14 +68,16 @@ function HomePage() {
         {mobileMenuOpen && (
           <div className="md:hidden bg-black border-t border-yellow-600">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <button onClick={() => scrollToSection('home')} className="block w-full text-left px-3 py-2 text-gray-300 hover:bg-gray-900 hover:text-yellow-500">Home</button>
-              <button onClick={() => scrollToSection('about')} className="block w-full text-left px-3 py-2 text-gray-300 hover:bg-gray-900 hover:text-yellow-500">About</button>
-              <button onClick={() => scrollToSection('offerings')} className="block w-full text-left px-3 py-2 text-gray-300 hover:bg-gray-900 hover:text-yellow-500">What We Offer</button>
-              <button onClick={() => scrollToSection('location')} className="block w-full text-left px-3 py-2 text-gray-300 hover:bg-gray-900 hover:text-yellow-500">Location</button>
+              <Link to="/" className="block w-full text-left px-3 py-2 text-gray-300 hover:bg-gray-900 hover:text-yellow-500">Home</Link>
+              <Link to="/menu" className="block w-full text-left px-3 py-2 text-gray-300 hover:bg-gray-900 hover:text-yellow-500">Menu</Link>
+              <Link to="/gallery" className="block w-full text-left px-3 py-2 text-gray-300 hover:bg-gray-900 hover:text-yellow-500">Gallery</Link>
+              <Link to="/contact" className="block w-full text-left px-3 py-2 text-gray-300 hover:bg-gray-900 hover:text-yellow-500">Contact</Link>
+              <Link to="/reservation" className="block w-full text-left px-3 py-2 text-gray-300 hover:bg-gray-900 hover:text-yellow-500">Reserve</Link>
             </div>
           </div>
         )}
       </nav>
+        
 
       {/* Hero Section with Background Image Carousel */}
       <section id="home" className="pt-16 min-h-screen flex items-center relative overflow-hidden">

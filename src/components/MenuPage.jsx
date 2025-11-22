@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Coffee, Utensils, Wine } from 'lucide-react';
+import { Coffee, Utensils, Wine,Menu ,X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import menuImage1 from '../assets/food/chapostew.png';
 import menuImage2 from '../assets/food/chips.png'
@@ -11,6 +11,8 @@ import menuImage4 from '../assets/food/latee.png';
 function App() {
   const [activeCategory, setActiveCategory] = useState('european');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
 
   const menuImages = [menuImage1,menuImage2,menuImage3,menuImage4];
 
@@ -123,50 +125,74 @@ function App() {
   return (
     <div className="min-h-screen bg-black">
       {/* Navigation with Category Tabs */}
-      <nav className="fixed top-0 w-full bg-black shadow-lg z-50 border-b border-yellow-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <Link to="/" className="text-2xl font-bold text-yellow-500">Iten Club Menu</Link>
-              
-            </div>
-            <div className="flex space-x-6" >
-              <Link to="/" className="text-gray-300 hover:text-yellow-500 transition">Home</Link>
-              <Link to="/gallery" className="text-gray-300 hover:text-yellow-500 transition">Gallery</Link>
-              <Link to="/contact" className="text-gray-300 hover:text-yellow-500 transition">Contact</Link>
-              <Link to="/reservation" className="text-gray-300 hover:text-yellow-500 transition">Reserve</Link>
-              </div>
-          </div>
-        </div>
+<nav className="fixed top-0 w-full bg-black shadow-lg z-50 border-b border-yellow-600">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="flex justify-between items-center h-16">
+      <div className="flex items-center">
+        <Link to="/" className="text-2xl font-bold text-yellow-500">Iten Club</Link>
+      </div>
+      
+      {/* Desktop Menu - Hidden on mobile, visible on desktop */}
+      <div className="hidden md:flex space-x-8">
+        <Link to="/" className="text-gray-300 hover:text-yellow-500 transition">Home</Link>
+        <Link to="/menu" className="text-yellow-500">Menu</Link>
+        <Link to="/gallery" className="text-gray-300 hover:text-yellow-500 transition">Gallery</Link>
+        <Link to="/contact" className="text-gray-300 hover:text-yellow-500 transition">Contact</Link>
+        <Link to="/reservation" className="text-gray-300 hover:text-yellow-500 transition">Reserve</Link>
+      </div>
 
-        {/* Category Tabs in Navigation */}
-        <div className="bg-gray-900 border-t border-yellow-600">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex overflow-x-auto">
-              {categories.map((category) => {
-                const Icon = category.icon;
-                return (
-                  <button
-                    key={category.id}
-                    onClick={() => {
-                      setActiveCategory(category.id);
-                      scrollToTop();
-                    }}
-                    className={`flex items-center space-x-2 px-6 py-4 whitespace-nowrap transition border-b-2 ${
-                      activeCategory === category.id
-                        ? 'border-yellow-500 text-yellow-500'
-                        : 'border-transparent text-gray-300 hover:text-yellow-500'
-                    }`}
-                  >
-                    <Icon size={20} />
-                    <span className="font-semibold">{category.name}</span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </nav>
+      {/* Mobile Menu Button */}
+      <button 
+        className="md:hidden text-yellow-500"
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+      >
+        {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
+    </div>
+  </div>
+
+  {/* Mobile Menu */}
+  {mobileMenuOpen && (
+    <div className="md:hidden bg-black border-t border-yellow-600">
+      <div className="px-2 pt-2 pb-3 space-y-1">
+        <Link to="/" className="block w-full text-left px-3 py-2 text-gray-300 hover:bg-gray-900 hover:text-yellow-500">Home</Link>
+        <Link to="/menu" className="block w-full text-left px-3 py-2 text-yellow-500 hover:bg-gray-900">Menu</Link>
+        <Link to="/gallery" className="block w-full text-left px-3 py-2 text-gray-300 hover:bg-gray-900 hover:text-yellow-500">Gallery</Link>
+        <Link to="/contact" className="block w-full text-left px-3 py-2 text-gray-300 hover:bg-gray-900 hover:text-yellow-500">Contact</Link>
+        <Link to="/reservation" className="block w-full text-left px-3 py-2 text-gray-300 hover:bg-gray-900 hover:text-yellow-500">Reserve</Link>
+      </div>
+    </div>
+  )}
+
+  {/* Category Tabs in Navigation */}
+  <div className="bg-gray-900 border-t border-yellow-600">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="flex overflow-x-auto">
+        {categories.map((category) => {
+          const Icon = category.icon;
+          return (
+            <button
+              key={category.id}
+              onClick={() => {
+                setActiveCategory(category.id);
+                scrollToTop();
+              }}
+              className={`flex items-center space-x-2 px-6 py-4 whitespace-nowrap transition border-b-2 ${
+                activeCategory === category.id
+                  ? 'border-yellow-500 text-yellow-500'
+                  : 'border-transparent text-gray-300 hover:text-yellow-500'
+              }`}
+            >
+              <Icon size={20} />
+              <span className="font-semibold">{category.name}</span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</nav>
+      
 
       {/* Hero Section with Background Image Carousel */}
       <section className="pt-32 pb-12 relative overflow-hidden min-h-96">

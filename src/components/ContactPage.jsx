@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { MapPin, Clock, Phone, Mail, Send } from 'lucide-react';
+import { MapPin, Clock, Phone, Mail, Send ,Menu,X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import contactImage1 from '../assets/atmosphere/atmosphere3.png';
 import contactImage2 from '../assets/atmosphere/restaurant1.jpeg';
@@ -20,6 +20,8 @@ function App() {
     date: '',
     guests: ''
   });
+  // Add mobile menu state
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Carousel state
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -33,13 +35,7 @@ function App() {
     contactImage5, 
     contactImage6, 
     contactImage7
-    // 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&q=80', // Restaurant interior
-    // 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80', // Food plating
-    // 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1920&q=80', // Coffee
-    // 'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1920&q=80', // Restaurant ambiance
-    // 'https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=1920&q=80', // Outdoor seating
-    // 'https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=1920&q=80', // Food preparation
-    // 'https://images.unsplash.com/photo-1578474846511-04ba529f0b88?w=1920&q=80'  // Restaurant exterior
+    
   ];
 
   // Auto-advance carousel every 6 seconds
@@ -90,22 +86,46 @@ function App() {
   return (
     <div className="min-h-screen bg-black">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-black shadow-lg z-50 border-b border-yellow-600">
+       <nav className="fixed top-0 w-full bg-black shadow-lg z-50 border-b border-yellow-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <Link to="/" className="text-2xl font-bold text-yellow-500">Iten Club</Link>
             </div>
-            <div className="flex space-x-6">
+            
+            {/* Desktop Menu - Hidden on mobile, visible on desktop */}
+            <div className="hidden md:flex space-x-8">
               <Link to="/" className="text-gray-300 hover:text-yellow-500 transition">Home</Link>
               <Link to="/menu" className="text-gray-300 hover:text-yellow-500 transition">Menu</Link>
               <Link to="/gallery" className="text-gray-300 hover:text-yellow-500 transition">Gallery</Link>
               <Link to="/contact" className="text-yellow-500">Contact</Link>
               <Link to="/reservation" className="text-gray-300 hover:text-yellow-500 transition">Reserve</Link>
             </div>
+
+            {/* Mobile Menu Button */}
+            <button 
+              className="md:hidden text-yellow-500"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-black border-t border-yellow-600">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              <Link to="/" className="block w-full text-left px-3 py-2 text-gray-300 hover:bg-gray-900 hover:text-yellow-500">Home</Link>
+              <Link to="/menu" className="block w-full text-left px-3 py-2 text-gray-300 hover:bg-gray-900 hover:text-yellow-500">Menu</Link>
+              <Link to="/gallery" className="block w-full text-left px-3 py-2 text-gray-300 hover:bg-gray-900 hover:text-yellow-500">Gallery</Link>
+              <Link to="/contact" className="block w-full text-left px-3 py-2 text-yellow-500 hover:bg-gray-900">Contact</Link>
+              <Link to="/reservation" className="block w-full text-left px-3 py-2 text-gray-300 hover:bg-gray-900 hover:text-yellow-500">Reserve</Link>
+            </div>
+          </div>
+        )}
       </nav>
+     
 
       {/* Hero Section with Carousel Background */}
       <section className="relative pt-24 pb-12 overflow-hidden">

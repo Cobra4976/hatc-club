@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Calendar, Clock, Users, MapPin, Phone, Mail, CheckCircle } from 'lucide-react';
+import { Calendar, Clock, Users, MapPin, Phone, Mail, CheckCircle ,Menu,X} from 'lucide-react';
 import { Link } from 'react-router-dom';
 function App() {
   const [formData, setFormData] = useState({
@@ -15,7 +15,11 @@ function App() {
     hearAboutUs: 'Walk-in'
   });
 
+ 
+
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -65,21 +69,45 @@ function App() {
     <div className="min-h-screen bg-black">
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-black shadow-lg z-50 border-b border-yellow-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <h1 className="text-2xl font-bold text-yellow-500">Iten Club</h1>
-            </div>
-            <div className="flex space-x-6">
-              <Link to="/" className="text-gray-300 hover:text-yellow-500 transition">Home</Link>
-             <Link to="/menu" className="text-gray-300 hover:text-yellow-500 transition">Menu</Link>
-             <Link to="/gallery" className="text-gray-300 hover:text-yellow-500 transition">Gallery</Link>
-              <Link to="/contact" className="text-gray-300 hover:text-yellow-500 transition">Contact</Link>
-              <Link to="/reservation" className="text-yellow-500">Reserve</Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="flex justify-between items-center h-16">
+      <div className="flex items-center">
+        <Link to="/" className="text-2xl font-bold text-yellow-500">Iten Club</Link>
+      </div>
+      
+      {/* Desktop Menu - Hidden on mobile, visible on desktop */}
+      <div className="hidden md:flex space-x-8">
+        <Link to="/" className="text-gray-300 hover:text-yellow-500 transition">Home</Link>
+        <Link to="/menu" className="text-gray-300 hover:text-yellow-500 transition">Menu</Link>
+        <Link to="/gallery" className="text-gray-300 hover:text-yellow-500 transition">Gallery</Link>
+        <Link to="/contact" className="text-gray-300 hover:text-yellow-500 transition">Contact</Link>
+        <Link to="/reservation" className="text-yellow-500">Reserve</Link>
+      </div>
+
+      {/* Mobile Menu Button */}
+      <button 
+        className="md:hidden text-yellow-500"
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+      >
+        {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
+    </div>
+  </div>
+
+  {/* Mobile Menu */}
+  {mobileMenuOpen && (
+    <div className="md:hidden bg-black border-t border-yellow-600">
+      <div className="px-2 pt-2 pb-3 space-y-1">
+        <Link to="/" className="block w-full text-left px-3 py-2 text-gray-300 hover:bg-gray-900 hover:text-yellow-500">Home</Link>
+        <Link to="/menu" className="block w-full text-left px-3 py-2 text-gray-300 hover:bg-gray-900 hover:text-yellow-500">Menu</Link>
+        <Link to="/gallery" className="block w-full text-left px-3 py-2 text-gray-300 hover:bg-gray-900 hover:text-yellow-500">Gallery</Link>
+        <Link to="/contact" className="block w-full text-left px-3 py-2 text-gray-300 hover:bg-gray-900 hover:text-yellow-500">Contact</Link>
+        <Link to="/reservation" className="block w-full text-left px-3 py-2 text-yellow-500 hover:bg-gray-900">Reserve</Link>
+      </div>
+    </div>
+  )}
+</nav>
+     
 
       {/* Hero Section */}
       <section className="pt-24 pb-12 bg-gradient-to-br from-black via-gray-900 to-black">
