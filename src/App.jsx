@@ -384,6 +384,8 @@ function HomePage() {
             <div>
               <h4 className="text-lg font-bold mb-4 text-yellow-500">Contact</h4>
               <ul className="space-y-2 text-gray-400">
+                <li>Tel no:+254 774700701</li>
+                <li>Email:info@itenclub.co.ke</li>
                 <li>Iten, Kenya</li>
                 <li>High Altitude road, Iten, 30700, KE</li>
                 <li>Open Daily: 8 AM - 9 PM</li>
